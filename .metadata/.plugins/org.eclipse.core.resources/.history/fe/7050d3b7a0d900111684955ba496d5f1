@@ -1,0 +1,58 @@
+
+package com.klef.soa;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+
+import com.klef.soa.entity.Apartment;
+import com.klef.soa.repository.ApartmentRepository;
+
+@DataJpaTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class ApartmentRepositoryTest {
+
+    @Autowired
+    private ApartmentRepository repository;
+
+    @Test
+    void testFindAllApartments() {
+        List<Apartment> apartments = repository.findAll();
+        assertNotNull(apartments);
+        System.out.println("Total Apartments: " + apartments.size());
+    }
+
+    @Test
+    void testFindApartmentById() {
+        Optional<Apartment> apartment = repository.findById(1L);
+        assertNotNull(apartment);
+        System.out.println("Apartment Found: " + apartment.isPresent());
+    }
+
+    @Test
+    void testFindApartmentByName() {
+        List<Apartment> apartments = repository.findByName("jahnavi");
+        assertNotNull(apartments);
+        System.out.println("Apartments by Name: " + apartments.size());
+    }
+
+    @Test
+    void testFindApartmentByType() {
+        List<Apartment> apartments = repository.findByType("3bhk");
+        assertNotNull(apartments);
+        System.out.println("Apartments by Type: " + apartments.size());
+    }
+
+    @Test
+    void testDatabaseCount() {
+        long count = repository.count();
+        assertTrue(count >= 0);
+        System.out.println("Total Apartments in Database: " + count);
+    }
+}

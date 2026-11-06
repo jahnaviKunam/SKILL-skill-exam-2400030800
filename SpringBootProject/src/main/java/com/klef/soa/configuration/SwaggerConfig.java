@@ -15,9 +15,9 @@ public class SwaggerConfig
     {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Apartment Service API")
+                        .title("Doctor Service API")
                         .version("1.0")
-                        .description("REST API Documentation for Apartment Service")
+                        .description("REST API Documentation for Doctor Microservice")
                         .contact(new Contact()
                                 .name("KLUniversity")
                                 .email("demo@example.com")));
